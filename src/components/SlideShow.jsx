@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-export default function SlideShow({ onAirShow }) {
+export default function SlideShow({ onAirShows }) {
   //state
   const [slideShowIndex, setSlideShowIndex] = useState(0);
 
-  let selectedImg = onAirShow[slideShowIndex] ? onAirShow[slideShowIndex] : "";
-  let onAirShowLength = onAirShow ? onAirShow.length : 0;
+  let selectedImg = onAirShows[slideShowIndex] || {};
 
   const handleSlideNext = () => {
-    if (slideShowIndex < onAirShowLength - 1) {
+    if (slideShowIndex < onAirShows.length - 1) {
       setSlideShowIndex(slideShowIndex + 1);
     }
   };

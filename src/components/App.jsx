@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
+import Navbar from "./Navbar";
 import Home from "../pages/Home";
 import TopRated from "../pages/TopRated";
 import Popular from "../pages/Popular";
@@ -9,12 +10,13 @@ function App() {
   return (
     <HashRouter basename="/">
       <div className="background center">
+        <Navbar />
         <Switch>
           <Route path="/" exact render={() => <Home />} />
           <Route path="/home" exact render={() => <Home />} />
-          <Route path="/Discover" exact render={() => <Discover />} />
-          <Route path="/TopRated" exact render={() => <TopRated />} />
-          <Route path="/Popular" exact render={() => <Popular />} />
+          <Route path="/discover" exact render={() => <Discover />} />
+          <Route path="/top-rated" exact render={() => <TopRated />} />
+          <Route path="/popular" exact render={() => <Popular />} />
         </Switch>
       </div>
     </HashRouter>
