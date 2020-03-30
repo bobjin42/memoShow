@@ -1,0 +1,32 @@
+.home {
+  width: 90%;
+  margin: 0 auto;
+
+  &-carousel {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-btn-prev,
+  &-btn-next {
+    font-size: 3.5rem;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  &-image {
+    width: 89%;
+  }
+}
+
+.home-title {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 100;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 3rem;
+}

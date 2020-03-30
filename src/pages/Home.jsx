@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import SlideShow from "../components/SlideShow";
 
 export default function Home() {
   //state
   const [onAirShows, setOnAirShows] = useState([]);
+  const [slideShowIndex, setSlideShowIndex] = useState(0);
 
   useEffect(() => {
     fetch(
@@ -13,12 +13,35 @@ export default function Home() {
       .then(data => setOnAirShows(data.results));
   }, []);
 
+  let selectedImg = onAirShows[slideShowIndex] || {};
+
+  const handleSlideNext = () => {
+    if (slideShowIndex < onAirShows.length - 1) {
+      setSlideShowIndex(slideShowIndex + 1);
+    }
+  };
+
+  const handleSlidePrev = () => {
+    if (slideShowIndex > 0) {
+      setSlideShowIndex(slideShowIndex - 1);
+    }
+  };
   return (
-    <div className="wrapper">
-      <header className="header">
-        <input placeholder="search..." className="searchbar"></input>
-      </header>
-      <SlideShow onAirShows={onAirShows} />
+    <div className="home">
+      <div className="home-carousel">
+        <button className="home-btn-prev" onClick={handleSlidePrev}>
+          &#10094;
+        </button>
+        <img
+          src={`https://image.tmdb.org/t/p/w1280${selectedImg.backdrop_path}`}
+          alt={selectedImg.name}
+          className="home-image"
+        ></img>
+        <button className="home-btn-next" onClick={handleSlideNext}>
+          &#10095;
+        </button>
+      </div>
+      <div className="home-title">{selectedImg.name}</div>
     </div>
   );
 }

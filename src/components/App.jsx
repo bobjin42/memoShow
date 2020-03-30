@@ -9,7 +9,7 @@ import Discover from "../pages/Discover";
 function App() {
   return (
     <HashRouter basename="/">
-      <div className="background center">
+      <div>
         <Navbar />
         <Switch>
           <Route path="/" exact render={() => <Home />} />

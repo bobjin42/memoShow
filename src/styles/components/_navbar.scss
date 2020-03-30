@@ -1,0 +1,29 @@
+.navbar {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+
+  &-link {
+    font-size: 2rem;
+    font-weight: 300;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1.5rem;
+    transition: all 0.2s;
+
+    &:hover {
+      color: black;
+      background-color: white;
+    }
+  }
+
+  &-input {
+    width: 20%;
+    height: 3rem;
+    padding: 1rem;
+  }
+}
