@@ -1,6 +1,14 @@
 import React from "react";
 
 export default function TvCard({ tvData, lastPopularShowRef }) {
+  const overviewConvert = () => {
+    let overviewLength = tvData.overview.split(" ").length;
+    let overviewString = tvData.overview.split(" ");
+    return overviewLength < 50
+      ? overviewString.join(" ")
+      : overviewString.slice(0, 50).join(" ") + "...";
+  };
+
   return (
     <div className="tv-card" ref={lastPopularShowRef}>
       <div className="tv-card-poster">
@@ -11,8 +19,8 @@ export default function TvCard({ tvData, lastPopularShowRef }) {
         ></img>
       </div>
       <div className="tv-card-detail">
-        <h1 className="tv-card-title">{tvData.name}</h1>
-        <h5>{tvData.overview}</h5>
+        <h1>{tvData.name}</h1>
+        <h5>{overviewConvert()}</h5>
       </div>
     </div>
   );
