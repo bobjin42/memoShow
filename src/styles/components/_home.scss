@@ -19,6 +19,7 @@
 
   &-image {
     width: 89%;
+    @include imgMask;
   }
 }
 
