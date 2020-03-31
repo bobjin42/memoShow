@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function TvCard({ tvData }) {
+export default function TvCard({ tvData, lastPopularShowRef }) {
   return (
-    <div className="tv-card">
+    <div className="tv-card" ref={lastPopularShowRef}>
       <div className="tv-card-poster">
         <img
           src={`https://image.tmdb.org/t/p/w500${tvData.poster_path}`}
