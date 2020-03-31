@@ -1,0 +1,32 @@
+//font-size
+$text-movie-title: 3rem;
+$text-summary: 1.2rem;
+$text-movie-description: 1.2rem;
+
+//font-weight
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+$font-regular: 400;
+$mont-bold: 700;
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $heading-font-family;
+  color: var(--accent-color);
+  margin: 0px;
+}
+
+h1 {
+  font-size: $text-movie-title;
+  font-weight: $font-regular;
+}
+
+h5 {
+  font-size: $text-summary;
+  font-weight: $font-regular;
+}
