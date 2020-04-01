@@ -1,0 +1,35 @@
+.detail-section {
+  &-bg {
+    border-bottom: 1px solid rgba(25.29%, 28.04%, 33.53%, 1);
+    background-position: right -200px top;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &-wrapper {
+    background-image: linear-gradient(
+      to right,
+      rgba(20.78%, 24.31%, 30.98%, 1) 150px,
+      rgba(29.8%, 31.76%, 36.08%, 0.84) 100%
+    );
+  }
+
+  &-information {
+    display: flex;
+    padding: 3rem 30rem;
+
+    img {
+      height: 40rem;
+    }
+  }
+
+  &-description {
+    display: flex;
+    margin-left: 3rem;
+    flex-direction: column;
+  }
+
+  &-genres {
+    padding: 2rem;
+  }
+}

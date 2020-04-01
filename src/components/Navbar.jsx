@@ -10,12 +10,6 @@ export default function Navbar() {
       <Link to="/discover" className="navbar-link">
         Discover
       </Link>
-      <Link to="/popular" className="navbar-link">
-        Popular
-      </Link>
-      <Link to="/top-rated" className="navbar-link">
-        Top Rated
-      </Link>
       <input placeholder="search..." className="navbar-input"></input>
     </nav>
   );

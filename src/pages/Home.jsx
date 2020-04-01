@@ -29,17 +29,21 @@ export default function Home() {
   return (
     <div className="home">
       <div className="home-carousel">
-        <button className="home-btn-prev" onClick={handleSlidePrev}>
-          &#10094;
-        </button>
-        <img
-          src={`https://image.tmdb.org/t/p/w1280${selectedImg.backdrop_path}`}
-          alt={selectedImg.name}
-          className="home-image"
-        ></img>
-        <button className="home-btn-next" onClick={handleSlideNext}>
-          &#10095;
-        </button>
+        {selectedImg && (
+          <>
+            <button className="home-btn-prev" onClick={handleSlidePrev}>
+              &#10094;
+            </button>
+            <img
+              src={`https://image.tmdb.org/t/p/w1280${selectedImg.backdrop_path}`}
+              alt={selectedImg.name}
+              className="home-image"
+            ></img>
+            <button className="home-btn-next" onClick={handleSlideNext}>
+              &#10095;
+            </button>
+          </>
+        )}
       </div>
       <div className="home-title">{selectedImg.name}</div>
     </div>
