@@ -10,9 +10,9 @@ function Discover({ match, history }) {
   const [hasMore, setHasMore] = useState(true);
   const [searchQuery, setSearchQuery] = useState("top_rated");
 
+  const genreId = match.params.id;
   useEffect(() => {
     setLoading(true);
-    const genreId = match.params.id;
     const fetchUrl = () => {
       if (genreId) {
         return `https://api.themoviedb.org/3/discover/tv?api_key=4e6dceee069232bb2d064403249143c6&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genreId}&include_null_first_air_dates=false`;

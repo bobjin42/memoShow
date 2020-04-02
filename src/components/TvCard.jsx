@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-function TvCard({ tvData, lastPopularShowRef, history }) {
+function TvCard({ tvData, lastshowListRef, history }) {
   const overviewConvert = () => {
     let overviewLength = tvData.overview.split(" ").length;
     let overviewString = tvData.overview.split(" ");
@@ -17,7 +17,7 @@ function TvCard({ tvData, lastPopularShowRef, history }) {
   return (
     <div
       className="tv-card"
-      ref={lastPopularShowRef}
+      ref={lastshowListRef}
       onClick={() => handleTvDetailClick(tvData.id)}
     >
       {tvData && (
