@@ -12,16 +12,12 @@ function Detail({ match, history }) {
       `https://api.themoviedb.org/3/tv/${id}?api_key=4e6dceee069232bb2d064403249143c6&language=en-US`
     )
       .then(result => result.json())
-      .then(data => setDetailData({ ...data }));
+      .then(data => setDetailData(data));
   }, [id]);
-
-  const handleGenreClick = id => {
-    history.push(`/discover/${id}`);
-  };
 
   return (
     <div className="detail-section">
-      {detailData && (
+      {detailData.name && (
         <>
           <div
             className="detail-section-bg"
@@ -34,24 +30,21 @@ function Detail({ match, history }) {
                 <img
                   alt={detailData.name}
                   src={`https://image.tmdb.org/t/p/w500${detailData.poster_path}`}
-                ></img>
+                />
                 <div className="detail-section-description">
                   <h1>{detailData.name}</h1>
                   <div>
                     <h5>{detailData.last_air_date}</h5>
                     <span>
-                      {detailData.genres &&
-                        detailData.genres.map(genre => {
-                          return (
-                            <span
-                              key={genre.id}
-                              onClick={() => handleGenreClick(genre.id)}
-                              className="detail-section-genres"
-                            >
-                              {genre.name}
-                            </span>
-                          );
-                        })}
+                      {detailData.genres.map(genre => (
+                        <span
+                          key={genre.id}
+                          onClick={() => history.push(`/discover/${genre.id}`)}
+                          className="detail-section-genres"
+                        >
+                          {genre.name}
+                        </span>
+                      ))}
                     </span>
                     <h5>{detailData.overview}</h5>
                   </div>

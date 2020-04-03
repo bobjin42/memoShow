@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import TvCard from "../components/TvCard";
 import { withRouter } from "react-router-dom";
 
@@ -6,52 +6,44 @@ function Discover({ match, history }) {
   //state
   const [showList, setshowList] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [hasMore, setHasMore] = useState(true);
   const [searchQuery, setSearchQuery] = useState("top_rated");
+  const [genreId, setGenreId] = useState(match.params.genreId);
 
-  const genreId = match.params.id;
   useEffect(() => {
-    setLoading(true);
-    const fetchUrl = () => {
-      if (genreId) {
-        return `https://api.themoviedb.org/3/discover/tv?api_key=4e6dceee069232bb2d064403249143c6&language=en-US&sort_by=popularity.desc&page=1&with_genres=${genreId}&include_null_first_air_dates=false`;
-      } else {
-        return `https://api.themoviedb.org/3/tv/${searchQuery}?api_key=4e6dceee069232bb2d064403249143c6&language=en-US&page=${page}`;
-      }
-    };
-    fetch(fetchUrl())
+    console.log(genreId);
+    const url = genreId
+      ? `https://api.themoviedb.org/3/discover/tv?api_key=4e6dceee069232bb2d064403249143c6&language=en-US&sort_by=popularity.desc&page=${page}&with_genres=${genreId}&include_null_first_air_dates=false`
+      : `https://api.themoviedb.org/3/tv/${searchQuery}?api_key=4e6dceee069232bb2d064403249143c6&language=en-US&page=${page}`;
+
+    fetch(url)
       .then(result => result.json())
       .then(data => {
-        setshowList(prevshowList => {
-          return [...prevshowList, ...data.results];
+        setshowList(prevShowList => {
+          return [...prevShowList, ...data.results];
         });
-        setHasMore(page < data.total_pages);
-        setLoading(false);
       });
-  }, [page, searchQuery]);
+  }, [page, searchQuery, genreId]);
 
-  const observer = useRef();
-  const lastshowListRef = useCallback(
-    showref => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          setPage(page => page + 1);
-        }
-      });
-      if (showref) observer.current.observe(showref);
-    },
-    [loading, hasMore]
-  );
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setPage(page => page + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handFilterClick = query => {
     if (query !== searchQuery) {
+      setGenreId(null);
       setshowList([]);
+      setPage(1);
       setSearchQuery(query);
     }
-    history.push("/discover");
   };
 
   return (
@@ -61,18 +53,8 @@ function Discover({ match, history }) {
         <h1 onClick={() => handFilterClick("popular")}>Most Popular</h1>
       </div>
       <div className="card-list">
-        {showList.map((show, index) => {
-          if (showList.length === index + 1) {
-            return (
-              <TvCard
-                lastshowListRef={lastshowListRef}
-                key={show.id + index}
-                tvData={show}
-              ></TvCard>
-            );
-          } else {
-            return <TvCard key={show.id + index} tvData={show}></TvCard>;
-          }
+        {showList.map(show => {
+          return <TvCard key={show.id} tvData={show}></TvCard>;
         })}
       </div>
     </div>
